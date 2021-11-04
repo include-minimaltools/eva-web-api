@@ -6,17 +6,13 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web;
-using System.Web.Http;
-using System.Web.Http.Results;
 using System.Web.Mvc;
-using AllowAnonymousAttribute = System.Web.Http.AllowAnonymousAttribute;
-using HttpGetAttribute = System.Web.Http.HttpGetAttribute;
-using HttpPostAttribute = System.Web.Http.HttpPostAttribute;
 
 namespace eva_web_api.Controllers
 {
     public class PermissionController : Controller
     {
+        
         UniModel db = new UniModel();
 
         [HttpGet]
@@ -26,7 +22,7 @@ namespace eva_web_api.Controllers
             return new JsonResult()
             {
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet,
-                Data = Json(from c in db.PERMISSION.ToList() select new { c.DESCRIPTION, c.PAGE, c.ACTION})
+                Data = Json(from c in db.PERMISSION.ToList() select new { c.DESCRIPTION, c.PAGE, c.ACTION })
             };
         }
 
@@ -38,7 +34,7 @@ namespace eva_web_api.Controllers
             return new JsonResult()
             {
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet,
-                Data = Json(from c in db.PERMISSION.ToList() where c.ID_PERMISSION == IdPermisson select new { c.DESCRIPTION, c.PAGE, c.ACTION})
+                Data = Json(from c in db.PERMISSION.ToList() where c.ID_PERMISSION == IdPermisson select new { c.DESCRIPTION, c.PAGE, c.ACTION })
             };
         }
 
@@ -46,7 +42,7 @@ namespace eva_web_api.Controllers
         [AllowAnonymous]
         public HttpResponseMessage InsertOrUpdate(PERMISSION element)
         {
-             PERMISSION permission= db.PERMISSION.FirstOrDefault(x => x.ID_PERMISSION == element.ID_PERMISSION);
+            PERMISSION permission = db.PERMISSION.FirstOrDefault(x => x.ID_PERMISSION == element.ID_PERMISSION);
             if (permission == null)
             {
                 db.CAMPUS.Add(new CAMPUS()
@@ -60,7 +56,7 @@ namespace eva_web_api.Controllers
             }
             else
             {
-                permission.PAGE= element.PAGE;
+                permission.PAGE = element.PAGE;
                 permission.DESCRIPTION = element.DESCRIPTION;
 
                 permission.DATE_UPDATE = DateTime.Now;
