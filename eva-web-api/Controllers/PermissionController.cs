@@ -30,10 +30,6 @@ namespace eva_web_api.Controllers
             };
         }
 
-        private object Json(IEnumerable<object> enumerable)
-        {
-            throw new NotImplementedException();
-        }
 
         [HttpGet]
         [AllowAnonymous]
