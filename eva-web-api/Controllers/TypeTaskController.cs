@@ -21,7 +21,7 @@ namespace eva_web_api.Controllers
             return new JsonResult()
             {
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet,
-                Data = Json(from c in db.TYPE_TASK.ToList() select new { c.DESCIPTION })
+                Data = Json(from c in db.TYPE_TASK.ToList() select new { c.ID_TYPE_TASK, c.DESCRIPTION })
             };
         }
 
@@ -32,7 +32,7 @@ namespace eva_web_api.Controllers
             return new JsonResult()
             {
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet,
-                Data = Json(from c in db.TYPE_TASK.ToList() where c.ID_TYPE_TASK == IdTypeTask select new { c.DESCIPTION })
+                Data = Json(from c in db.TYPE_TASK.ToList() where c.ID_TYPE_TASK == IdTypeTask select new { c.ID_TYPE_TASK, c.DESCRIPTION })
             };
         }
 
@@ -46,12 +46,12 @@ namespace eva_web_api.Controllers
                 db.TYPE_TASK.Add(new TYPE_TASK()
                 {
                     ID_TYPE_TASK = element.ID_TYPE_TASK,
-                    DESCIPTION = element.DESCIPTION
+                    DESCRIPTION = element.DESCRIPTION
                 });
             }
             else
             {
-                typetask.DESCIPTION = element.DESCIPTION;
+                typetask.DESCRIPTION = element.DESCRIPTION;
 
                 db.Entry(typetask).State = EntityState.Modified;
             }

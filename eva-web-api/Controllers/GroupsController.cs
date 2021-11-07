@@ -21,7 +21,7 @@ namespace eva_web_api.Controllers
             return new JsonResult()
             {
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet,
-                Data = Json(from c in db.GROUPS.ToList() select new { c.NAME })
+                Data = Json(from c in db.GROUPS.ToList() select new { c.ID_GROUPS, c.NAME })
             };
         }
 
@@ -32,7 +32,7 @@ namespace eva_web_api.Controllers
             return new JsonResult()
             {
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet,
-                Data = Json(from c in db.GROUPS.ToList() where c.ID_GROUPS == IdGroups select new { c.NAME})
+                Data = Json(from c in db.GROUPS.ToList() where c.ID_GROUPS == IdGroups select new { c.ID_GROUPS, c.NAME})
             };
         }
 

@@ -21,7 +21,7 @@ namespace eva_web_api.Controllers
             return new JsonResult()
             {
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet,
-                Data = Json(from c in db.TASK.ToList() select new { c.NAME, c.DESCRIPTION, c.DELIVERY_DATE, c.FK_ID_COURSE })
+                Data = Json(from c in db.TASK.ToList() select new { c.ID_TASK, c.NAME, c.DESCRIPTION, c.DELIVERY_DATE, c.ID_COURSE, c.ID_TYPE_TASK })
             };
         }
 
@@ -32,7 +32,7 @@ namespace eva_web_api.Controllers
             return new JsonResult()
             {
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet,
-                Data = Json(from c in db.TASK.ToList() where c.ID_TASK == IdTask select new { c.NAME, c.DESCRIPTION, c.DELIVERY_DATE, c.FK_ID_COURSE })
+                Data = Json(from c in db.TASK.ToList() where c.ID_TASK == IdTask select new { c.ID_TASK, c.NAME, c.DESCRIPTION, c.DELIVERY_DATE, c.ID_COURSE, c.ID_TYPE_TASK })
             };
         }
 
@@ -49,7 +49,8 @@ namespace eva_web_api.Controllers
                     NAME = element.NAME,
                     DESCRIPTION = element.DESCRIPTION,
                     DELIVERY_DATE = element.DELIVERY_DATE,
-                    FK_ID_COURSE = element.FK_ID_COURSE
+                    ID_COURSE = element.ID_COURSE,
+                    ID_TYPE_TASK = element.ID_TYPE_TASK
                 });
             }
             else

@@ -21,7 +21,7 @@ namespace eva_web_api.Controllers
             return new JsonResult()
             {
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet,
-                Data = Json(from c in db.TEACHER.ToList() select new { c.EMAIL, c.NAME, c.LASTNAME, c.ADDRESS, c.PHONE, c.USER_CREATE, c.DATE_CREATE })
+                Data = Json(from c in db.TEACHER.ToList() select new { c.ID_TEACHER, c.NAME, c.LASTNAME, c.ADDRESS, c.PHONE, c.ID_FACULTY ,c.EMAIL, c.USER_CREATE, c.DATE_CREATE })
             };
         }
 
@@ -32,7 +32,7 @@ namespace eva_web_api.Controllers
             return new JsonResult()
             {
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet,
-                Data = Json(from c in db.TEACHER.ToList() where c.ID_TEACHER == IdTeacher select new { c.EMAIL, c.NAME, c.LASTNAME, c.ADDRESS, c.PHONE, c.USER_CREATE, c.DATE_CREATE })
+                Data = Json(from c in db.TEACHER.ToList() where c.ID_TEACHER == IdTeacher select new { c.ID_TEACHER, c.NAME, c.LASTNAME, c.ADDRESS, c.PHONE, c.ID_FACULTY, c.EMAIL, c.USER_CREATE, c.DATE_CREATE })
             };
         }
 
@@ -51,7 +51,7 @@ namespace eva_web_api.Controllers
                     ADDRESS = element.ADDRESS,
                     PHONE = element.PHONE,
                     EMAIL = element.EMAIL,
-                    FK_ID_FACULTY = element.FK_ID_FACULTY,
+                    ID_FACULTY = element.ID_FACULTY,
                     DATE_CREATE = element.DATE_CREATE = DateTime.Now,
                     USER_CREATE = "admin"
                 });

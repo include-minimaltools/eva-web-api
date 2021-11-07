@@ -21,7 +21,7 @@ namespace eva_web_api.Controllers
             return new JsonResult()
             {
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet,
-                Data = Json(from c in db.TASK_COMMENT.ToList() select new { c.ID_STUDENT_TASK ,c.EMAIL_USER, c.TYPE_TASK, c.DESCRIPTON, c.USER_CREATE, c.DATE_CREATE })
+                Data = Json(from c in db.TASK_COMMENT.ToList() select new { c.ID_TASK_COMMENT, c.ID_STUDENT_TASK ,c.EMAIL_USER, c.TYPE_TASK, c.DESCRIPTION, c.USER_CREATE, c.DATE_CREATE })
             };
         }
 
@@ -32,7 +32,7 @@ namespace eva_web_api.Controllers
             return new JsonResult()
             {
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet,
-                Data = Json(from c in db.TASK_COMMENT.ToList() where c.ID_TASK_COMMENT == IdTaskComment select new { c.ID_STUDENT_TASK, c.EMAIL_USER, c.TYPE_TASK, c.DESCRIPTON, c.USER_CREATE, c.DATE_CREATE })
+                Data = Json(from c in db.TASK_COMMENT.ToList() where c.ID_TASK_COMMENT == IdTaskComment select new { c.ID_TASK_COMMENT, c.ID_STUDENT_TASK, c.EMAIL_USER, c.TYPE_TASK, c.DESCRIPTION, c.USER_CREATE, c.DATE_CREATE })
             };
         }
 
@@ -49,14 +49,15 @@ namespace eva_web_api.Controllers
                     ID_STUDENT_TASK = element.ID_STUDENT_TASK,
                     EMAIL_USER = element.EMAIL_USER,
                     TYPE_TASK = element.TYPE_TASK,
-                    DESCRIPTON = element.DESCRIPTON,
+                    DESCRIPTION = element.DESCRIPTION,
                     DATE_CREATE = element.DATE_CREATE = DateTime.Now,
                     USER_CREATE = "admin"
                 });
             }
             else
             {
-                taskcomment.DESCRIPTON = element.DESCRIPTON;
+                taskcomment.TYPE_TASK = element.TYPE_TASK;
+                taskcomment.DESCRIPTION = element.DESCRIPTION;
 
                 taskcomment.DATE_UPDATE = DateTime.Now;
                 taskcomment.USER_UPDATE = "admin";

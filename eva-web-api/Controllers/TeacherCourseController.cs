@@ -53,6 +53,7 @@ namespace eva_web_api.Controllers
             }
             else
             {
+                teachercourse.ID_COURSE = element.ID_COURSE;
                 teachercourse.DATE_UPDATE = DateTime.Now;
                 teachercourse.USER_UPDATE = "admin";
 
