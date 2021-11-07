@@ -45,11 +45,12 @@ namespace eva_web_api.Controllers
             PERMISSION permission = db.PERMISSION.FirstOrDefault(x => x.ID_PERMISSION == element.ID_PERMISSION);
             if (permission == null)
             {
-                db.CAMPUS.Add(new CAMPUS()
+                db.PERMISSION.Add(new PERMISSION()
                 {
-                    ID_CAMPUS = element.ID_PERMISSION,
+                    ID_PERMISSION= element.ID_PERMISSION,
                     DESCRIPTION = element.DESCRIPTION,
-                    ADDRESS = element.PAGE,
+                    PAGE= element.PAGE,
+                    ACTION = element.ACTION,
                     DATE_CREATE = element.DATE_CREATE = DateTime.Now,
                     USER_CREATE = "admin"
                 });
