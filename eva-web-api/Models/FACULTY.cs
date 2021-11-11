@@ -13,9 +13,6 @@ namespace eva_web_api.Models
         public FACULTY()
         {
             CAREER = new HashSet<CAREER>();
-            CAREER1 = new HashSet<CAREER>();
-            CAREER2 = new HashSet<CAREER>();
-            CAREER3 = new HashSet<CAREER>();
             TEACHER = new HashSet<TEACHER>();
         }
 
@@ -23,8 +20,7 @@ namespace eva_web_api.Models
         [StringLength(10)]
         public string ID_FACULTY { get; set; }
 
-        [Required]
-        [StringLength(40)]
+        [StringLength(500)]
         public string DESCRIPTION { get; set; }
 
         [Required]
@@ -40,15 +36,6 @@ namespace eva_web_api.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CAREER> CAREER { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CAREER> CAREER1 { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CAREER> CAREER2 { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CAREER> CAREER3 { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TEACHER> TEACHER { get; set; }

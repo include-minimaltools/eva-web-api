@@ -12,8 +12,8 @@ namespace eva_web_api.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ROLE()
         {
-            USERS = new HashSet<USERS>();
             ROLE_PERMISSION = new HashSet<ROLE_PERMISSION>();
+            USERS = new HashSet<USERS>();
         }
 
         [Key]
@@ -21,7 +21,7 @@ namespace eva_web_api.Models
         public string ID_ROLE { get; set; }
 
         [Required]
-        [StringLength(20)]
+        [StringLength(500)]
         public string DESCRIPTION { get; set; }
 
         [Required]
@@ -36,9 +36,9 @@ namespace eva_web_api.Models
         public DateTime? DATE_UPDATE { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<USERS> USERS { get; set; }
+        public virtual ICollection<ROLE_PERMISSION> ROLE_PERMISSION { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ROLE_PERMISSION> ROLE_PERMISSION { get; set; }
+        public virtual ICollection<USERS> USERS { get; set; }
     }
 }

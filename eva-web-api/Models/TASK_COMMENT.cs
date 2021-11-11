@@ -8,27 +8,24 @@ namespace eva_web_api.Models
 
     public partial class TASK_COMMENT
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TASK_COMMENT()
-        {
-            STUDENT_TASK = new HashSet<STUDENT_TASK>();
-        }
-
         [Key]
         [StringLength(10)]
         public string ID_TASK_COMMENT { get; set; }
 
+        [Required]
         [StringLength(10)]
         public string ID_STUDENT_TASK { get; set; }
 
+        [Required]
         [StringLength(50)]
         public string EMAIL_USER { get; set; }
 
+        [Required]
         [StringLength(10)]
         public string TYPE_TASK { get; set; }
 
-        [StringLength(50)]
-        public string DESCRIPTON { get; set; }
+        [StringLength(500)]
+        public string DESCRIPTION { get; set; }
 
         [Required]
         [StringLength(20)]
@@ -40,12 +37,5 @@ namespace eva_web_api.Models
         public string USER_UPDATE { get; set; }
 
         public DateTime? DATE_UPDATE { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<STUDENT_TASK> STUDENT_TASK { get; set; }
-
-        public virtual TYPE_TASK TYPE_TASK1 { get; set; }
-
-        public virtual USERS USERS { get; set; }
     }
 }

@@ -25,10 +25,9 @@ namespace eva_web_api.Models
         [StringLength(10)]
         public string QUALIFICATION { get; set; }
 
-        [Column(TypeName = "date")]
         public DateTime? SEND_DATE { get; set; }
 
-        [MaxLength(50)]
+        [MaxLength(60)]
         public byte[] TASK_FILE { get; set; }
 
         [Required]
@@ -43,8 +42,6 @@ namespace eva_web_api.Models
         public DateTime? DATE_UPDATE { get; set; }
 
         public virtual STUDENT STUDENT { get; set; }
-
-        public virtual TASK_COMMENT TASK_COMMENT { get; set; }
 
         public virtual TASK TASK { get; set; }
     }

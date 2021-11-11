@@ -28,18 +28,23 @@ namespace eva_web_api.Models
         [StringLength(20)]
         public string LASTNAME { get; set; }
 
-        [StringLength(40)]
+        [StringLength(500)]
         public string ADDRESS { get; set; }
 
         [StringLength(9)]
         public string PHONE { get; set; }
 
+        [Required]
         [StringLength(50)]
         public string EMAIL { get; set; }
 
         [Required]
         [StringLength(5)]
-        public string CAREER { get; set; }
+        public string ID_CAREER { get; set; }
+
+        [Required]
+        [StringLength(10)]
+        public string ID_GROUPS { get; set; }
 
         [Required]
         [StringLength(20)]
@@ -52,19 +57,16 @@ namespace eva_web_api.Models
 
         public DateTime? DATE_UPDATE { get; set; }
 
-        [StringLength(10)]
-        public string FK_ID_GROUP { get; set; }
-
-        public virtual CAREER CAREER1 { get; set; }
+        public virtual CAREER CAREER { get; set; }
 
         public virtual GROUPS GROUPS { get; set; }
+
+        public virtual USERS USERS { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<STUDENT_COURSE> STUDENT_COURSE { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<STUDENT_TASK> STUDENT_TASK { get; set; }
-
-        public virtual USERS USERS { get; set; }
     }
 }

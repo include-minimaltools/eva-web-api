@@ -20,7 +20,7 @@ namespace eva_web_api.Models
         [Key]
         [Column(Order = 0)]
         [StringLength(5)]
-        public string ID_CARRER { get; set; }
+        public string ID_CAREER { get; set; }
 
         [Key]
         [Column(Order = 1)]
