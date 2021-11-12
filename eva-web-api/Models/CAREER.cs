@@ -13,21 +13,23 @@ namespace eva_web_api.Models
         public CAREER()
         {
             COURSE = new HashSet<COURSE>();
-            STUDENT = new HashSet<STUDENT>();
             SEMESTER = new HashSet<SEMESTER>();
+            STUDENT = new HashSet<STUDENT>();
         }
 
         [Key]
         [StringLength(5)]
-        public string ID_CARRER { get; set; }
+        public string ID_CAREER { get; set; }
 
         [Required]
-        [StringLength(40)]
+        [StringLength(500)]
         public string DESCRIPTION { get; set; }
 
+        [Required]
         [StringLength(10)]
         public string FACULTY { get; set; }
 
+        [Required]
         [StringLength(10)]
         public string CAMPUS { get; set; }
 
@@ -44,27 +46,15 @@ namespace eva_web_api.Models
 
         public virtual CAMPUS CAMPUS1 { get; set; }
 
-        public virtual CAMPUS CAMPUS2 { get; set; }
-
-        public virtual CAMPUS CAMPUS3 { get; set; }
-
-        public virtual CAMPUS CAMPUS4 { get; set; }
-
         public virtual FACULTY FACULTY1 { get; set; }
-
-        public virtual FACULTY FACULTY2 { get; set; }
-
-        public virtual FACULTY FACULTY3 { get; set; }
-
-        public virtual FACULTY FACULTY4 { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<COURSE> COURSE { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<STUDENT> STUDENT { get; set; }
+        public virtual ICollection<SEMESTER> SEMESTER { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SEMESTER> SEMESTER { get; set; }
+        public virtual ICollection<STUDENT> STUDENT { get; set; }
     }
 }

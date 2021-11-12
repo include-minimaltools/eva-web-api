@@ -13,23 +13,33 @@ namespace eva_web_api.Models
         public TEACHER()
         {
             TEACHER_COURSE = new HashSet<TEACHER_COURSE>();
+            TEACHER_GROUPS = new HashSet<TEACHER_GROUPS>();
         }
 
         [Key]
         [StringLength(10)]
         public string ID_TEACHER { get; set; }
 
-        [StringLength(10)]
+        [Required]
+        [StringLength(20)]
         public string NAME { get; set; }
 
-        [StringLength(10)]
+        [StringLength(20)]
         public string LASTNAME { get; set; }
 
-        [StringLength(40)]
+        [StringLength(500)]
         public string ADDRESS { get; set; }
 
         [StringLength(9)]
         public string PHONE { get; set; }
+
+        [Required]
+        [StringLength(10)]
+        public string ID_FACULTY { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        public string EMAIL { get; set; }
 
         [Required]
         [StringLength(20)]
@@ -42,17 +52,14 @@ namespace eva_web_api.Models
 
         public DateTime? DATE_UPDATE { get; set; }
 
-        [StringLength(10)]
-        public string FK_ID_FACULTY { get; set; }
-
-        [StringLength(50)]
-        public string EMAIL { get; set; }
-
         public virtual FACULTY FACULTY { get; set; }
+
+        public virtual USERS USERS { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TEACHER_COURSE> TEACHER_COURSE { get; set; }
 
-        public virtual USERS USERS { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TEACHER_GROUPS> TEACHER_GROUPS { get; set; }
     }
 }

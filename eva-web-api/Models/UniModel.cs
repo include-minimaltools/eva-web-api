@@ -8,7 +8,7 @@ namespace eva_web_api.Models
     public partial class UniModel : DbContext
     {
         public UniModel()
-            : base("name=UniDatabaseModel")
+            : base("name=UniDatabase")
         {
         }
 
@@ -22,51 +22,31 @@ namespace eva_web_api.Models
         public virtual DbSet<ROLE_PERMISSION> ROLE_PERMISSION { get; set; }
         public virtual DbSet<SEMESTER> SEMESTER { get; set; }
         public virtual DbSet<STUDENT> STUDENT { get; set; }
+        public virtual DbSet<STUDENT_COURSE> STUDENT_COURSE { get; set; }
         public virtual DbSet<STUDENT_TASK> STUDENT_TASK { get; set; }
         public virtual DbSet<TASK> TASK { get; set; }
         public virtual DbSet<TASK_COMMENT> TASK_COMMENT { get; set; }
         public virtual DbSet<TEACHER> TEACHER { get; set; }
+        public virtual DbSet<TEACHER_COURSE> TEACHER_COURSE { get; set; }
+        public virtual DbSet<TEACHER_GROUPS> TEACHER_GROUPS { get; set; }
         public virtual DbSet<TYPE_TASK> TYPE_TASK { get; set; }
         public virtual DbSet<USERS> USERS { get; set; }
-        public virtual DbSet<STUDENT_COURSE> STUDENT_COURSE { get; set; }
-        public virtual DbSet<TEACHER_COURSE> TEACHER_COURSE { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<CAMPUS>()
                 .HasMany(e => e.CAREER)
-                .WithOptional(e => e.CAMPUS1)
-                .HasForeignKey(e => e.CAMPUS);
-
-            modelBuilder.Entity<CAMPUS>()
-                .HasMany(e => e.CAREER1)
-                .WithOptional(e => e.CAMPUS2)
-                .HasForeignKey(e => e.CAMPUS);
-
-            modelBuilder.Entity<CAMPUS>()
-                .HasMany(e => e.CAREER2)
-                .WithOptional(e => e.CAMPUS3)
-                .HasForeignKey(e => e.CAMPUS);
-
-            modelBuilder.Entity<CAMPUS>()
-                .HasMany(e => e.CAREER3)
-                .WithOptional(e => e.CAMPUS4)
-                .HasForeignKey(e => e.CAMPUS);
+                .WithRequired(e => e.CAMPUS1)
+                .HasForeignKey(e => e.CAMPUS)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<CAREER>()
-                .Property(e => e.ID_CARRER)
+                .Property(e => e.ID_CAREER)
                 .IsUnicode(false);
 
             modelBuilder.Entity<CAREER>()
                 .HasMany(e => e.COURSE)
                 .WithRequired(e => e.CAREER)
-                .HasForeignKey(e => e.ID_CAREER)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<CAREER>()
-                .HasMany(e => e.STUDENT)
-                .WithRequired(e => e.CAREER1)
-                .HasForeignKey(e => e.CAREER)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<CAREER>()
@@ -74,9 +54,10 @@ namespace eva_web_api.Models
                 .WithRequired(e => e.CAREER)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<COURSE>()
-                .Property(e => e.ID_CAREER)
-                .IsUnicode(false);
+            modelBuilder.Entity<CAREER>()
+                .HasMany(e => e.STUDENT)
+                .WithRequired(e => e.CAREER)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<COURSE>()
                 .Property(e => e.NAME)
@@ -87,9 +68,8 @@ namespace eva_web_api.Models
                 .IsFixedLength();
 
             modelBuilder.Entity<COURSE>()
-                .HasMany(e => e.STUDENT_COURSE)
-                .WithRequired(e => e.COURSE)
-                .WillCascadeOnDelete(false);
+                .Property(e => e.ID_CAREER)
+                .IsUnicode(false);
 
             modelBuilder.Entity<COURSE>()
                 .HasMany(e => e.SEMESTER)
@@ -97,34 +77,30 @@ namespace eva_web_api.Models
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<COURSE>()
+                .HasMany(e => e.STUDENT_COURSE)
+                .WithRequired(e => e.COURSE)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<COURSE>()
                 .HasMany(e => e.TASK)
-                .WithOptional(e => e.COURSE)
-                .HasForeignKey(e => e.FK_ID_COURSE);
+                .WithRequired(e => e.COURSE)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<COURSE>()
+                .HasMany(e => e.TEACHER_COURSE)
+                .WithRequired(e => e.COURSE)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<FACULTY>()
                 .HasMany(e => e.CAREER)
-                .WithOptional(e => e.FACULTY1)
-                .HasForeignKey(e => e.FACULTY);
-
-            modelBuilder.Entity<FACULTY>()
-                .HasMany(e => e.CAREER1)
-                .WithOptional(e => e.FACULTY2)
-                .HasForeignKey(e => e.FACULTY);
-
-            modelBuilder.Entity<FACULTY>()
-                .HasMany(e => e.CAREER2)
-                .WithOptional(e => e.FACULTY3)
-                .HasForeignKey(e => e.FACULTY);
-
-            modelBuilder.Entity<FACULTY>()
-                .HasMany(e => e.CAREER3)
-                .WithOptional(e => e.FACULTY4)
-                .HasForeignKey(e => e.FACULTY);
+                .WithRequired(e => e.FACULTY1)
+                .HasForeignKey(e => e.FACULTY)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<FACULTY>()
                 .HasMany(e => e.TEACHER)
-                .WithOptional(e => e.FACULTY)
-                .HasForeignKey(e => e.FK_ID_FACULTY);
+                .WithRequired(e => e.FACULTY)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<GROUPS>()
                 .Property(e => e.ID_GROUPS)
@@ -136,8 +112,13 @@ namespace eva_web_api.Models
 
             modelBuilder.Entity<GROUPS>()
                 .HasMany(e => e.STUDENT)
-                .WithOptional(e => e.GROUPS)
-                .HasForeignKey(e => e.FK_ID_GROUP);
+                .WithRequired(e => e.GROUPS)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<GROUPS>()
+                .HasMany(e => e.TEACHER_GROUPS)
+                .WithRequired(e => e.GROUPS)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<PERMISSION>()
                 .HasMany(e => e.ROLE_PERMISSION)
@@ -145,14 +126,14 @@ namespace eva_web_api.Models
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<ROLE>()
-                .HasMany(e => e.USERS)
-                .WithOptional(e => e.ROLE1)
-                .HasForeignKey(e => e.ROLE);
-
-            modelBuilder.Entity<ROLE>()
                 .HasMany(e => e.ROLE_PERMISSION)
                 .WithRequired(e => e.ROLE)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<ROLE>()
+                .HasMany(e => e.USERS)
+                .WithOptional(e => e.ROLE1)
+                .HasForeignKey(e => e.ROLE);
 
             modelBuilder.Entity<SEMESTER>()
                 .Property(e => e.ID_SEMESTER)
@@ -163,7 +144,7 @@ namespace eva_web_api.Models
                 .IsFixedLength();
 
             modelBuilder.Entity<SEMESTER>()
-                .Property(e => e.ID_CARRER)
+                .Property(e => e.ID_CAREER)
                 .IsUnicode(false);
 
             modelBuilder.Entity<STUDENT>()
@@ -171,11 +152,11 @@ namespace eva_web_api.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<STUDENT>()
-                .Property(e => e.CAREER)
+                .Property(e => e.ID_CAREER)
                 .IsUnicode(false);
 
             modelBuilder.Entity<STUDENT>()
-                .Property(e => e.FK_ID_GROUP)
+                .Property(e => e.ID_GROUPS)
                 .IsUnicode(false);
 
             modelBuilder.Entity<STUDENT>()
@@ -189,6 +170,10 @@ namespace eva_web_api.Models
                 .WithRequired(e => e.STUDENT)
                 .HasForeignKey(e => e.ID_STUDENT)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<STUDENT_COURSE>()
+                .Property(e => e.ID_STUDENT)
+                .IsUnicode(false);
 
             modelBuilder.Entity<STUDENT_TASK>()
                 .Property(e => e.ID_STUDENT)
@@ -211,6 +196,10 @@ namespace eva_web_api.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<TASK>()
+                .Property(e => e.ID_TYPE_TASK)
+                .IsFixedLength();
+
+            modelBuilder.Entity<TASK>()
                 .HasMany(e => e.STUDENT_TASK)
                 .WithRequired(e => e.TASK)
                 .WillCascadeOnDelete(false);
@@ -220,14 +209,8 @@ namespace eva_web_api.Models
                 .IsFixedLength();
 
             modelBuilder.Entity<TASK_COMMENT>()
-                .Property(e => e.DESCRIPTON)
+                .Property(e => e.DESCRIPTION)
                 .IsUnicode(false);
-
-            modelBuilder.Entity<TASK_COMMENT>()
-                .HasMany(e => e.STUDENT_TASK)
-                .WithRequired(e => e.TASK_COMMENT)
-                .HasForeignKey(e => e.ID_STUDENT_TASK)
-                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<TEACHER>()
                 .Property(e => e.NAME)
@@ -237,27 +220,42 @@ namespace eva_web_api.Models
                 .Property(e => e.LASTNAME)
                 .IsFixedLength();
 
+            modelBuilder.Entity<TEACHER>()
+                .HasMany(e => e.TEACHER_COURSE)
+                .WithRequired(e => e.TEACHER)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<TEACHER>()
+                .HasMany(e => e.TEACHER_GROUPS)
+                .WithRequired(e => e.TEACHER)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<TEACHER_GROUPS>()
+                .Property(e => e.ID_GROUPS)
+                .IsUnicode(false);
+
             modelBuilder.Entity<TYPE_TASK>()
                 .Property(e => e.ID_TYPE_TASK)
                 .IsFixedLength();
 
             modelBuilder.Entity<TYPE_TASK>()
-                .Property(e => e.DESCIPTION)
+                .Property(e => e.DESCRIPTION)
                 .IsFixedLength();
 
             modelBuilder.Entity<TYPE_TASK>()
-                .HasMany(e => e.TASK_COMMENT)
-                .WithOptional(e => e.TYPE_TASK1)
-                .HasForeignKey(e => e.TYPE_TASK);
+                .HasMany(e => e.TASK)
+                .WithRequired(e => e.TYPE_TASK)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<USERS>()
-                .HasMany(e => e.TASK_COMMENT)
-                .WithOptional(e => e.USERS)
-                .HasForeignKey(e => e.EMAIL_USER);
+                .HasMany(e => e.STUDENT)
+                .WithRequired(e => e.USERS)
+                .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<STUDENT_COURSE>()
-                .Property(e => e.ID_STUDENT)
-                .IsUnicode(false);
+            modelBuilder.Entity<USERS>()
+                .HasMany(e => e.TEACHER)
+                .WithRequired(e => e.USERS)
+                .WillCascadeOnDelete(false);
         }
     }
 }

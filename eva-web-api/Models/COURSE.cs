@@ -12,18 +12,25 @@ namespace eva_web_api.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public COURSE()
         {
-            STUDENT_COURSE = new HashSet<STUDENT_COURSE>();
             SEMESTER = new HashSet<SEMESTER>();
+            STUDENT_COURSE = new HashSet<STUDENT_COURSE>();
             TASK = new HashSet<TASK>();
             TEACHER_COURSE = new HashSet<TEACHER_COURSE>();
         }
 
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ID_COURSE { get; set; }
 
+        [Required]
+        [StringLength(40)]
+        public string NAME { get; set; }
+
+        [Required]
         [StringLength(500)]
         public string DESCRIPTION { get; set; }
+
+        [StringLength(500)]
+        public string OBJECTS { get; set; }
 
         public int CREDITS { get; set; }
 
@@ -46,20 +53,13 @@ namespace eva_web_api.Models
 
         public DateTime? DATE_UPDATE { get; set; }
 
-        [Required]
-        [StringLength(10)]
-        public string NAME { get; set; }
-
-        [StringLength(10)]
-        public string OBJECTS { get; set; }
-
         public virtual CAREER CAREER { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<STUDENT_COURSE> STUDENT_COURSE { get; set; }
+        public virtual ICollection<SEMESTER> SEMESTER { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SEMESTER> SEMESTER { get; set; }
+        public virtual ICollection<STUDENT_COURSE> STUDENT_COURSE { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TASK> TASK { get; set; }

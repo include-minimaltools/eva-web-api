@@ -11,17 +11,17 @@ namespace eva_web_api.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TYPE_TASK()
         {
-            TASK_COMMENT = new HashSet<TASK_COMMENT>();
+            TASK = new HashSet<TASK>();
         }
 
         [Key]
         [StringLength(10)]
         public string ID_TYPE_TASK { get; set; }
 
-        [StringLength(10)]
-        public string DESCIPTION { get; set; }
+        [StringLength(500)]
+        public string DESCRIPTION { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TASK_COMMENT> TASK_COMMENT { get; set; }
+        public virtual ICollection<TASK> TASK { get; set; }
     }
 }

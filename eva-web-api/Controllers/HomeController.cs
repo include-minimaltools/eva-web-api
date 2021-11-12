@@ -11,7 +11,6 @@ namespace eva_web_api.Controllers
         public ActionResult Index()
         {
             ViewBag.Title = "Home Page";
-
             return View();
         }
     }

@@ -6,7 +6,7 @@ namespace eva_web_api.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class TEACHER_COURSE
+    public partial class TEACHER_GROUPS
     {
         [Key]
         [Column(Order = 0)]
@@ -15,8 +15,8 @@ namespace eva_web_api.Models
 
         [Key]
         [Column(Order = 1)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int ID_COURSE { get; set; }
+        [StringLength(10)]
+        public string ID_GROUPS { get; set; }
 
         [Required]
         [StringLength(20)]
@@ -29,7 +29,7 @@ namespace eva_web_api.Models
 
         public DateTime? DATE_UPDATE { get; set; }
 
-        public virtual COURSE COURSE { get; set; }
+        public virtual GROUPS GROUPS { get; set; }
 
         public virtual TEACHER TEACHER { get; set; }
     }

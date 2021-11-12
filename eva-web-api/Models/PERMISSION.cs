@@ -20,7 +20,7 @@ namespace eva_web_api.Models
         public string ID_PERMISSION { get; set; }
 
         [Required]
-        [StringLength(20)]
+        [StringLength(500)]
         public string DESCRIPTION { get; set; }
 
         [Required]

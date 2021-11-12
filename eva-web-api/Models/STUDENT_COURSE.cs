@@ -18,13 +18,10 @@ namespace eva_web_api.Models
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ID_COURSE { get; set; }
 
-        [Key]
-        [Column(Order = 2)]
+        [Required]
         [StringLength(20)]
         public string USER_CREATE { get; set; }
 
-        [Key]
-        [Column(Order = 3)]
         public DateTime DATE_CREATE { get; set; }
 
         [StringLength(20)]
