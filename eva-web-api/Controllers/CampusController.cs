@@ -21,7 +21,7 @@ namespace eva_web_api.Controllers
             return new JsonResult()
             {
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet,
-                Data = Json(from c in db.CAMPUS.ToList() select new { c.ID_CAMPUS, c.DESCRIPTION, c.ADDRESS })
+                Data = Json(from c in db.CAMPUS.ToList() select new { c.ID_CAMPUS, c.DESCRIPTION, c.ADDRESS, c.USER_CREATE, c.DATE_CREATE })
             };
         }
 
@@ -32,7 +32,7 @@ namespace eva_web_api.Controllers
             return new JsonResult()
             {
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet,
-                Data = Json(from c in db.CAMPUS.ToList() where c.ID_CAMPUS == IdCampus select new { c.ID_CAMPUS, c.DESCRIPTION, c.ADDRESS })
+                Data = Json(from c in db.CAMPUS.ToList() where c.ID_CAMPUS == IdCampus select new { c.ID_CAMPUS, c.DESCRIPTION, c.ADDRESS, c.USER_CREATE, c.DATE_CREATE })
             };
         }
 
